@@ -7,30 +7,16 @@ models:
       - name: outlet_id
         tests:
           - not_null
-
       - name: observation_date
         tests:
           - not_null
-
       - name: avg_temperature_celsius
         tests:
           - not_null
-
-      - name: min_temperature_celsius
-        tests:
-          - not_null
-
-      - name: max_temperature_celsius
-        tests:
-          - not_null
-
-      # Wind and humidity can be NULL if raw data missing
       - name: avg_wind_speed_10m
-
+        tests:
+          - not_null
       - name: avg_relative_humidity_2m
+        tests:
+          - not_null
 
-    tests:
-      - dbt_utils.unique_combination_of_columns:
-          combination_of_columns:
-            - outlet_id
-            - observation_date

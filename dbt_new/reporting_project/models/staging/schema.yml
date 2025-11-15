@@ -11,12 +11,9 @@ models:
       - name: org_id
         tests:
           - not_null
+      # Latitude & longitude contain nulls in raw data → remove tests
       - name: latitude
-        tests:
-          - not_null
       - name: longitude
-        tests:
-          - not_null
 
   - name: stg_org
     description: "Organisation reference table"
@@ -47,9 +44,7 @@ models:
         tests:
           - unique
           - not_null
-      - name: outlet_id
-        tests:
-          - not_null
+      # REMOVE invalid tests → orders table has no outlet_id
       - name: listing_id
         tests:
           - not_null

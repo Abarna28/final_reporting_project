@@ -1,0 +1,46 @@
+version: 2
+
+models:
+  - name: fct_orders_enriched
+    description: "Final fact table combining enriched order, listing, outlet, and org information for reporting."
+    columns:
+      - name: order_id
+        description: "Unique identifier for each order."
+        tests:
+          - not_null
+
+      - name: order_timestamp
+        description: "Timestamp when the order was created."
+
+      - name: status
+        description: "Order status such as completed, cancelled, etc."
+
+      - name: outlet_id
+        description: "Reference to the outlet fulfilling the order."
+
+      - name: outlet_name
+        description: "Name of the outlet."
+
+      - name: latitude
+        description: "Outlet latitude."
+
+      - name: longitude
+        description: "Outlet longitude."
+
+      - name: org_name
+        description: "Organization name associated with the outlet."
+
+      - name: listing_id
+        description: "Reference to product listing."
+
+      - name: item_name
+        description: "Name of the item, if available."
+
+      - name: order_day
+        description: "Aggregated order day for daily level metrics."
+
+      - name: total_orders
+        description: "Total orders per day for the outlet."
+
+      - name: total_revenue
+        description: "Total revenue per day for the outlet."
