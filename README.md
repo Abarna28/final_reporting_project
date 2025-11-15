@@ -32,8 +32,9 @@ Final Output
     - fct_orders_enriched  
     - fct_weather_daily  
 
-Repository Structure
+## Repository Structure
 
+```
 Airflow - final_reporting_project/
 │
 ├── README.md
@@ -68,7 +69,7 @@ Airflow - final_reporting_project/
 │       │       ├── fct_orders_enriched.sql
 │       │       ├── fct_weather_daily.sql
 │       │       └── core.yml
-│
+│       │
 │       ├── seeds/
 │       │   ├── listing.csv
 │       │   ├── orders.csv
@@ -78,12 +79,14 @@ Airflow - final_reporting_project/
 │       │   ├── platform.csv
 │       │   ├── rank.csv
 │       │   └── ratings_agg.csv
-│
+│       │
 │       ├── macros/
 │       └── analyses/
 │
 └── data_raw/
     └── weather_raw_open_meteo.json
+```
+
 
 dbt Model Layers
 
