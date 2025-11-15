@@ -1,0 +1,22 @@
+# Ignore Python virtual environments
+dbt_venv/
+
+# Ignore Airflow logs
+logs/
+airflow/logs/
+
+# Ignore dbt generated folders
+target/
+dbt_packages/
+dbt_internal_packages/
+
+# Ignore Python bytecode
+__pycache__/
+*.pyc
+
+# Ignore environment and secrets
+.env
+.user.yml
+
+# Ignore docker folders
+plugins/__pycache__/

@@ -1,0 +1,12 @@
+version: 2
+
+models:
+  - name: int_weather_hourly_aggregates
+    description: "Aggregates hourly weather data into daily metrics per outlet."
+    columns:
+      - name: outlet_id
+        tests:
+          - not_null
+      - name: observation_date
+        tests:
+          - not_null

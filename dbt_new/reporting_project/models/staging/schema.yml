@@ -1,0 +1,103 @@
+version: 2
+
+models:
+  - name: stg_outlet
+    description: "Cleaned outlet data"
+    columns:
+      - name: outlet_id
+        tests:
+          - unique
+          - not_null
+      - name: org_id
+        tests:
+          - not_null
+      - name: latitude
+        tests:
+          - not_null
+      - name: longitude
+        tests:
+          - not_null
+
+  - name: stg_org
+    description: "Organisation reference table"
+    columns:
+      - name: org_id
+        tests:
+          - unique
+          - not_null
+      - name: org_name
+        tests:
+          - not_null
+
+  - name: stg_listing
+    description: "Listing table for menu items"
+    columns:
+      - name: listing_id
+        tests:
+          - unique
+          - not_null
+      - name: outlet_id
+        tests:
+          - not_null
+
+  - name: stg_orders
+    description: "Base orders data"
+    columns:
+      - name: order_id
+        tests:
+          - unique
+          - not_null
+      - name: outlet_id
+        tests:
+          - not_null
+      - name: listing_id
+        tests:
+          - not_null
+
+  - name: stg_orders_daily
+    description: "Daily aggregated orders"
+    columns:
+      - name: listing_id
+        tests:
+          - not_null
+      - name: order_date
+        tests:
+          - not_null
+
+  - name: stg_platform
+    description: "Platform reference table"
+    columns:
+      - name: platform_id
+        tests:
+          - unique
+          - not_null
+
+  - name: stg_rank
+    description: "Rank history table"
+    columns:
+      - name: listing_id
+        tests:
+          - not_null
+      - name: rank_date
+        tests:
+          - not_null
+
+  - name: stg_ratings_agg
+    description: "Ratings aggregate table"
+    columns:
+      - name: listing_id
+        tests:
+          - not_null
+      - name: rating_date
+        tests:
+          - not_null
+
+  - name: stg_weather_hourly
+    description: "Cleaned weather staging model"
+    columns:
+      - name: outlet_id
+        tests:
+          - not_null
+      - name: observation_time_utc
+        tests:
+          - not_null

@@ -1,0 +1,19 @@
+version: 2
+
+sources:
+  - name: public_raw
+    schema: public_raw
+    tables:
+      - name: listing
+      - name: outlet
+      - name: org
+      - name: platform
+      - name: orders
+      - name: orders_daily
+      - name: ratings_agg
+      - name: rank
+      - name: weather_hourly
+        loaded_at_field: created_at
+        freshness:
+          warn_after: {count: 3, period: hour}
+          error_after: {count: 6, period: hour}

@@ -1,0 +1,13 @@
+version: 2
+
+models:
+  - name: fct_weather_orders_daily
+    description: "Final daily reporting model combining weather and orders"
+    columns:
+      - name: outlet_id
+        tests:
+          - not_null
+
+      - name: date
+        tests:
+          - not_null
