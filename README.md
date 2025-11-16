@@ -1,8 +1,18 @@
 Final Reporting Project — ELT Pipeline (Airflow, dbt, Postgres, Open-Meteo)
 
-Summary
-This repository implements an end-to-end ELT pipeline that processes raw restaurant and order datasets, fetches hourly weather data via Airflow, loads all data into Postgres, and transforms it into clean, analytics-ready reporting tables using dbt.  
-The objective is to produce a unified reporting model that allows the business to evaluate daily performance and understand relationships between sales, platform data, ratings, rank, and weather conditions.
+Summary:
+
+This repository implements an end-to-end ELT pipeline that ingests raw restaurant/order data, fetches hourly weather metrics using Airflow, loads all data into Postgres, and transforms it into clean, analytics-ready reporting tables using dbt.
+
+The final objective is to deliver a reporting model that helps the business analyze daily performance and understand relationships between:
+
+1.sales & orders
+
+2.listings, outlets, org, platform
+
+3.ratings and ranking
+
+4.weather conditions
 
 Project Objectives (Based on Assessment Requirements)
 - Clean, standardize, and deduplicate raw CSV data.  
@@ -14,6 +24,20 @@ Project Objectives (Based on Assessment Requirements)
 - Provide clean SQL and Python code and deliver the project in a structured Git repository.
 
 Architecture Overview
+
+          CSV Seeds                     Open-Meteo API (Hourly Weather)
+               |                                      |
+         dbt seed → raw tables                Airflow DAG → weather_hourly_raw
+                                \            /
+                                 \          /
+                              Postgres Warehouse
+                                      |
+                           dbt Transformations
+                     (staging → intermediate → fact)
+                                      |
+                         Final Reporting Tables
+                   fct_orders_enriched & fct_weather_daily
+
 
 Raw Data (CSV Seeds)  
     → Loaded via dbt seed into Postgres as raw tables  
@@ -29,10 +53,14 @@ Warehouse Transformations (dbt)
     3. Fact models         (final reporting tables)  
 
 Final Output  
-    - fct_orders_enriched  
-    - fct_weather_daily  
+1.fct_orders_enriched — one row per order; enriched with listing, outlet, org, platform, order metrics, cumulative + delta ratings, and ranking metrics
 
-## Repository Structure
+2.fct_weather_daily — one row per outlet per day; aggregated temp, humidity, wind; built from hourly API data
+
+ 
+ 
+ 
+ ##Repository Structure
 
 ```
 Airflow - final_reporting_project/
@@ -111,6 +139,9 @@ DAG: weather_etl.py
 - Parses and converts JSON into a structured DataFrame.
 - Loads the result into Postgres (public_raw.weather_hourly).
 - dbt later aggregates this into daily reporting metrics.
+- The DAG performs:
+- dbt transforms this into daily weather fact tables
+- The DAG completes end-to-end successfully.
 
 How to Run the Project
 
@@ -130,7 +161,10 @@ Implemented using dbt tests:
 - not_null tests for critical fields  
 - unique test on order_id  
 - relationships tests for listing_id and outlet_id  
-- freshness tests for weather data  
+- freshness tests for weather data
+- Weather freshness test
+- Additional manual SQL validation for row counts, duplicate checks, nulls, and source inconsistencies
+- A complete Data Quality Summary PDF is provided with the submission.
 
 ELT Approach
 This project uses ELT:
@@ -140,6 +174,8 @@ This project uses ELT:
 
 This approach ensures reproducibility, transparency, and efficient use of warehouse compute.
 
-Notes
-This project was created specifically for a data engineering assessment.  
+Notes:
+
+ERD Diagram and DAG screenshots are also attached as files .
+This project was created specifically for a data engineering assessment.
 The company name is intentionally omitted as requested.
