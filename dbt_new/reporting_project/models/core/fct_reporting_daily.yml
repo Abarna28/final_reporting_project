@@ -1,0 +1,13 @@
+version: 2
+
+models:
+  - name: fct_reporting_daily
+    description: "Unified daily reporting model combining orders, ratings, ranking, and weather"
+    columns:
+      - name: outlet_id
+        tests:
+          - not_null
+
+      - name: date
+        tests:
+          - not_null
