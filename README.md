@@ -57,6 +57,8 @@ Final Output
 
 2.fct_weather_daily — one row per outlet per day; aggregated temp, humidity, wind; built from hourly API data
 
+3.fct_reporting_daily — final unified daily reporting table combining orders, ratings, rank, and weather data.
+
  
  
  
